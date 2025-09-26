@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  ms-clientes-api:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db-clientes
+
+  db-clientes:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: clientesdb
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
